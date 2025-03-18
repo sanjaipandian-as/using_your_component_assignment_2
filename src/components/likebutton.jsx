@@ -1,18 +1,38 @@
-import { useState } from "react";
+import LikeButton from "./LikeButton";
 
-const LikeButton = () => {
-  const [liked, setLiked] = useState(false);
-
+const PostCard = ({ post }) => {
   return (
-    <button
-      onClick={() => setLiked(!liked)}
-      className={`px-4 py-2 rounded-full transition-all ${
-        liked ? "bg-red-500 text-white" : "bg-gray-300 text-black"
-      }`}
-    >
-      {liked ? "❤️ Liked" : "🤍 Like"}
-    </button>
+    <div style={styles.card}>
+      <img src={post.profileImage} alt="Profile" style={styles.profilePic} />
+      <div style={styles.content}>
+        <h3>{post.username}</h3>
+        <p>{post.content}</p>
+        <LikeButton initialLiked={post.isLiked} />
+      </div>
+    </div>
   );
 };
 
-export default LikeButton;
+const styles = {
+  card: {
+    display: "flex",
+    alignItems: "center",
+    border: "1px solid #ddd",
+    borderRadius: "8px",
+    padding: "10px",
+    margin: "10px 0",
+    backgroundColor: "#fff",
+    boxShadow: "0px 2px 5px rgba(0,0,0,0.2)",
+  },
+  profilePic: {
+    width: "50px",
+    height: "50px",
+    borderRadius: "50%",
+    marginRight: "10px",
+  },
+  content: {
+    flex: 1,
+  },
+};
+
+export default PostCard;
